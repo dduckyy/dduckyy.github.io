@@ -1,5 +1,4 @@
 celluloid
-curl
 efibootmgr
 eog
 evince
@@ -13,14 +12,14 @@ gnome-system-monitor
 gnome-terminal
 gnome-tweak-tool
 grub
+gvfs-goa
+gvfs-google
 nautilus
 networkmanager-openvpn
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
-nvidia
-nvidia-settings
 pacman-contrib
 pulseaudio
 sudo
