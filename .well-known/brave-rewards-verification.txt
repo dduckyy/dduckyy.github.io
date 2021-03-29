@@ -1,4 +1,0 @@
-This is a Brave Rewards publisher verification file.
-
-Domain: dvcky.ga
-Token: 299af4834768a620192a0cea2bdab3259815ef244bc40a20a70d42390d8c6670
