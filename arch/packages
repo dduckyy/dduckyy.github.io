@@ -60,3 +60,4 @@ makepkg -si
 EDITOR=nano visudo
 systemctl enable gdm
 systemctl enable NetworkManager
+echo Install finished! type `exit`,then `reboot now`.
