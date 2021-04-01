@@ -1,27 +1,62 @@
-celluloid
-efibootmgr
-eog
-evince
-file-roller
-gdm
-gedit
-git
-gnome-control-center
-gnome-keyring
-gnome-shell
-gnome-system-monitor
-gnome-terminal
-gnome-tweak-tool
-grub
-gvfs-goa
-gvfs-google
-nautilus
-networkmanager-openvpn
-noto-fonts
-noto-fonts-cjk
-noto-fonts-emoji
-noto-fonts-extra
-pacman-contrib
-pulseaudio
-sudo
-xdg-user-dirs
+#!/bin/sh
+echo Loaded Dvcky QAI (Quick Arch Install)!
+timedatectl set-ntp true
+fdisk -l
+echo Enter drive to install arch below:
+read drive
+fdisk $drive
+echo Enter boot partition below:
+read boot
+echo Enter linux partition below:
+read linux
+mkfs.fat -F32 $boot
+mkfs.ext4 $linux
+mount $linux /mnt
+pacstrap /mnt base linux linux-firmware nano networkmanager
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
+find /usr/share/zoneinfo
+echo Enter timezone (format: Zone/SubZone):
+read time
+ln -sf /usr/share/zoneinfo/$time /etc/localtime
+hwclock --systohc
+nano /etc/locale.gen
+locale-gen
+echo "LANG=" >> /etc/locale.conf
+nano /etc/locale.conf
+echo Choose system name:
+read name
+echo "$name" >> /etc/hostname
+echo "127.0.0.1 localhost" >> /etc/hosts
+echo "::1       localhost" >> /etc/hosts
+echo "127.0.1.1 $name.localdomain $name" >> /etc/hosts
+mkinitcpio -P
+passwd
+pacman -S celluloid efibootmgr eog evince file-roller gdm gedit git gnome-control-center gnome-keyring gnome-shell gnome-system-monitor gnome-terminal gnome-tweak-tool grub gvfs-goa gvfs-google nautilus networkmanager-openvpn noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra pacman-contrib pulseaudio sudo xdg-user-dirs
+mkdir /boot/efi
+mount $boot /boot/efi
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+echo Do you need Nvidia configuration? (y/n)
+read yn
+if [ "$yn" != "${yn#[Yy]}" ] ;then
+    pacman -S nvidia nvidia-settings
+    nano /etc/default/grub
+    nano /etc/mkinitcpio.conf
+fi
+mkinitcpio -P
+grub-mkconfig -o /boot/grub/grub.cfg
+nano /etc/pacman.conf
+echo Enter username below:
+read uname
+useradd -m -G wheel $uname
+passwd $uname
+echo Account created, login to install pamac and get mirror script:
+su $uname
+curl -o updatemirrors https://www.dvcky.ga/arch/updatemirrors
+chmod +x updatemirrors
+git clone https://aur.archlinux.org/pamac-aur.git
+cd pamac-aur
+makepkg -si
+EDITOR=nano visudo
+systemctl enable gdm
+systemctl enable NetworkManager
