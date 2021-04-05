@@ -15,7 +15,7 @@ mkinitcpio -P
 passwd
 pacman -S celluloid efibootmgr eog evince file-roller gdm gedit git gnome-control-center gnome-keyring gnome-shell gnome-system-monitor gnome-terminal gnome-tweak-tool grub gvfs-goa gvfs-google nautilus networkmanager-openvpn noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra pacman-contrib pulseaudio sudo xdg-user-dirs
 mkdir /boot/efi
-read -p "Enter boot partition here: " boot
+read -p "Enter boot partition: " boot
 mount $boot /boot/efi
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 read -p "Do you need Nvidia configuration? (y/n): " yn
