@@ -2,13 +2,10 @@
 echo Loaded Dvcky QAI \(Quick Arch Install\)!
 timedatectl set-ntp true
 fdisk -l
-echo Enter drive to install arch below:
-read drive
+read -p "Enter drive to install arch here: " drive
 fdisk $drive
-echo Enter boot partition below:
-read boot
-echo Enter linux partition below:
-read linux
+read -p "Enter boot partition: " boot
+read -p "Enter linux partition: " linux
 mkfs.fat -F32 $boot
 mkfs.ext4 $linux
 mount $linux /mnt
