@@ -1,0 +1,17 @@
+#!/bin/sh
+echo Loaded Dvcky QAI \(Quick Arch Install\)!
+timedatectl set-ntp true
+fdisk -l
+echo Enter drive to install arch below:
+read drive
+fdisk $drive
+echo Enter boot partition below:
+read boot
+echo Enter linux partition below:
+read linux
+mkfs.fat -F32 $boot
+mkfs.ext4 $linux
+mount $linux /mnt
+pacstrap /mnt base linux linux-firmware nano networkmanager
+genfstab -U /mnt >> /mnt/etc/fstab
+echo Done with part 1! Run \"arch-chroot /mnt\", then download and run part 2.
