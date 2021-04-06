@@ -13,22 +13,17 @@ echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 $name.localdomain $name" >> /etc/hosts
 mkinitcpio -P
 passwd
-pacman -S celluloid efibootmgr eog evince file-roller gdm gedit git gnome-control-center gnome-keyring gnome-shell gnome-system-monitor gnome-terminal gnome-tweak-tool grub gvfs-goa gvfs-google nautilus networkmanager-openvpn noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra pacman-contrib pulseaudio sudo xdg-user-dirs
+pacman -S celluloid efibootmgr eog evince file-roller gdm gedit git gnome-control-center gnome-keyring gnome-shell gnome-system-monitor gnome-terminal gnome-tweak-tool grub gvfs-goa gvfs-google nautilus networkmanager-openvpn noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra nvidia nvidia-settings pacman-contrib pulseaudio sudo xdg-user-dirs
 mkdir /boot/efi
 read -p "Enter boot partition: " boot
 mount $boot /boot/efi
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
-read -p "Do you need Nvidia configuration? (y/n): " yn
-if [ "$yn" != "${yn#[Yy]}" ] ;then
-    pacman -S nvidia nvidia-settings
-    nano /etc/default/grub
-    nano /etc/mkinitcpio.conf
-fi
+nano /etc/default/grub
+nano /etc/mkinitcpio.conf
 mkinitcpio -P
 grub-mkconfig -o /boot/grub/grub.cfg
 nano /etc/pacman.conf
-echo Enter username below:
-read uname
+read -p "Enter username: " uname
 useradd -m -G wheel $uname
 passwd $uname
 EDITOR=nano visudo
