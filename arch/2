@@ -1,10 +1,13 @@
-find /usr/share/zoneinfo
+#!/bin/sh
+read -p "Loaded Dvcky QAI2 \(Quick Arch Install\)!"
+find /usr/share/zoneinfo -printf "%P\n"
 read -p "Enter timezone (format: Zone/SubZone): " time
 ln -sf /usr/share/zoneinfo/$time /etc/localtime
 hwclock --systohc
 nano /etc/locale.gen
 locale-gen
 echo "LANG=" >> /etc/locale.conf
+read -p "Retype language chosen after pressing enter..."
 nano /etc/locale.conf
 read -p "Choose system name: " name
 echo "$name" >> /etc/hostname
@@ -13,12 +16,14 @@ echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 $name.localdomain $name" >> /etc/hosts
 mkinitcpio -P
 passwd
-pacman -S celluloid curl efibootmgr eog evince file-roller gdm gedit git gnome-control-center gnome-shell gnome-system-monitor gnome-terminal gnome-tweak-tool grub nautilus networkmanager-openvpn noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra nvidia nvidia-settings pacman-contrib pulseaudio sudo xdg-user-dirs
+pacman -S ark curl dolphin efibootmgr git konsole kwrite networkmanager networkmanager-openvpn noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra nvidia nvidia-settings pacman-contrib partitionmanager plasma pulseaudio sddm sudo xdg-user-dirs
 mkdir /boot/efi
 read -p "Enter boot partition: " boot
 mount $boot /boot/efi
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+read -p "Add \"nvidia-drm.modeset=1\" in \"GRUB_CMDLINE_LINUX_DEFAULT\"."
 nano /etc/default/grub
+read -p "Now, add \"nvidia nvidia_modeset nvidia_uvm nvidia_drm\" in \"MODULES\"."
 nano /etc/mkinitcpio.conf
 mkinitcpio -P
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -26,8 +31,10 @@ nano /etc/pacman.conf
 read -p "Enter username: " uname
 useradd -m -G wheel $uname
 passwd $uname
+read -p "Uncomment \"%wheel ALL=\(ALL\) ALL\" to give users sudo permission."
 EDITOR=nano visudo
-systemctl enable gdm
+systemctl enable sddm
 systemctl enable NetworkManager
 systemctl enable bluetooth
-echo Install finished! Type \"exit\", then \"reboot now\".
+echo Done! Type \"exit\", then \"reboot now\".
+rm 2
