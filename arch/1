@@ -4,6 +4,7 @@ timedatectl set-ntp true
 fdisk -l
 read -p "Enter drive to install arch here: " drive
 fdisk $drive
+fdisk -l $drive
 read -p "Enter boot partition: " boot
 read -p "Enter linux partition: " linux
 mkfs.fat -F32 $boot
