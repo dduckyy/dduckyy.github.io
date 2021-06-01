@@ -16,7 +16,7 @@ echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 $name.localdomain $name" >> /etc/hosts
 mkinitcpio -P
 passwd
-pacman -S celluloid curl efibootmgr eog evince file-roller gdm gedit git gnome-control-center gnome-shell gnome-system-monitor gnome-terminal gnome-tweaks grub nautilus networkmanager networkmanager-openvpn noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra nvidia nvidia-settings pacman-contrib pulseaudio sudo xdg-user-dirs
+pacman -S celluloid curl efibootmgr evince file-roller gdm gedit git gnome-control-center gnome-shell gnome-system-monitor gnome-terminal gnome-tweaks grub gthumb nautilus networkmanager networkmanager-openvpn noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra nvidia nvidia-settings pacman-contrib pulseaudio sudo xdg-user-dirs
 mkdir /boot/efi
 read -p "Enter boot partition: " boot
 mount $boot /boot/efi
