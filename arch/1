@@ -10,7 +10,7 @@ read -p "Enter linux partition: " linux
 mkfs.fat -F32 $boot
 mkfs.ext4 $linux
 mount $linux /mnt
-pacstrap /mnt base linux linux-firmware nano
+pacstrap /mnt base base-devel linux linux-firmware nano
 genfstab -U /mnt >> /mnt/etc/fstab
 echo Done! Run \"arch-chroot /mnt\", then download and run part 2.
 rm 1
