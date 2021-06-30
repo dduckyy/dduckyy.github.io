@@ -16,7 +16,12 @@ echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 $name.localdomain $name" >> /etc/hosts
 mkinitcpio -P
 passwd
-pacman -S celluloid curl efibootmgr evince file-roller gdm gedit git gnome-control-center gnome-shell gnome-system-monitor gnome-terminal gnome-tweaks grub gthumb nautilus networkmanager networkmanager-openvpn noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra nvidia nvidia-settings pacman-contrib pulseaudio sudo xdg-user-dirs
+pacman -S celluloid curl efibootmgr git grub noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra pacman-contrib sudo xdg-user-dirs xorg-server
+# GNOME: pacman -S celluloid evince file-roller gdm gedit gnome-control-center gnome-shell gnome-system-monitor gnome-terminal gnome-tweaksgthumb nautilus networkmanager networkmanager-openvpn pulseaudio
+# KDE: pacman -S dolphin konsole plasma-meta
+# Nvidia: pacman -S nvidia nvidia-settings
+# VirtualBox: pacman -S virtualbox-guest-utils
+# XFCE: pacman -S lightdm lightdm-gtk-greeter network-manager-applet xfce4 xfce4-goodies
 mkdir /boot/efi
 read -p "Enter boot partition: " boot
 mount $boot /boot/efi
@@ -33,7 +38,7 @@ useradd -m -G wheel $uname
 passwd $uname
 read -p "Uncomment \"%wheel ALL=\(ALL\) ALL\" to give users sudo permission."
 EDITOR=nano visudo
-systemctl enable gdm
+# systemctl enable <DISPLAY MANAGER HERE>
 systemctl enable NetworkManager
 systemctl enable bluetooth
 echo Done! Type \"exit\", then \"reboot now\".
