@@ -16,7 +16,7 @@ echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 $name.localdomain $name" >> /etc/hosts
 mkinitcpio -P
 passwd
-pacman -S celluloid curl efibootmgr git grub noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra pacman-contrib sudo xdg-user-dirs xorg-server
+pacman -S curl efibootmgr git grub noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra pacman-contrib sudo xdg-user-dirs xorg-server
 # GNOME: pacman -S celluloid evince file-roller gdm gedit gnome-control-center gnome-shell gnome-system-monitor gnome-terminal gnome-tweaksgthumb nautilus networkmanager networkmanager-openvpn pulseaudio
 # KDE: pacman -S dolphin konsole plasma-meta
 # Nvidia: pacman -S nvidia nvidia-settings
@@ -26,10 +26,11 @@ mkdir /boot/efi
 read -p "Enter boot partition: " boot
 mount $boot /boot/efi
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
-read -p "Add \"nvidia-drm.modeset=1\" in \"GRUB_CMDLINE_LINUX_DEFAULT\"."
-nano /etc/default/grub
-read -p "Now, add \"nvidia nvidia_modeset nvidia_uvm nvidia_drm\" in \"MODULES\"."
-nano /etc/mkinitcpio.conf
+# NVIDIA ONLY
+# read -p "Add \"nvidia-drm.modeset=1\" in \"GRUB_CMDLINE_LINUX_DEFAULT\"."
+# nano /etc/default/grub
+# read -p "Now, add \"nvidia nvidia_modeset nvidia_uvm nvidia_drm\" in \"MODULES\"."
+# nano /etc/mkinitcpio.conf
 mkinitcpio -P
 grub-mkconfig -o /boot/grub/grub.cfg
 nano /etc/pacman.conf
