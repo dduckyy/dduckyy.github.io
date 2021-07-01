@@ -17,6 +17,7 @@ echo "127.0.1.1 $name.localdomain $name" >> /etc/hosts
 mkinitcpio -P
 passwd
 pacman -S curl efibootmgr git grub noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra pacman-contrib sudo xdg-user-dirs xorg-server
+# Cinnamon: pacman -S blueberry cinnamon lightdm lightdm-gtk-greeter
 # GNOME: pacman -S celluloid evince file-roller gdm gedit gnome-control-center gnome-shell gnome-system-monitor gnome-terminal gnome-tweaksgthumb nautilus networkmanager networkmanager-openvpn pulseaudio
 # KDE: pacman -S dolphin konsole plasma-meta
 # Nvidia: pacman -S nvidia nvidia-settings
