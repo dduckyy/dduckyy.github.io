@@ -19,7 +19,7 @@ passwd
 pacman -S curl efibootmgr git grub noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra pacman-contrib sudo xdg-user-dirs xorg-server
 # Cinnamon: pacman -S blueberry cinnamon lightdm lightdm-gtk-greeter
 # GNOME: pacman -S celluloid evince file-roller gdm gedit gnome-control-center gnome-shell gnome-system-monitor gnome-terminal gnome-tweaksgthumb nautilus networkmanager networkmanager-openvpn pulseaudio
-# KDE: pacman -S dolphin konsole plasma-meta
+# KDE: pacman -S ark dolphin konsole packagekit-qt5 plasma-meta
 # Nvidia: pacman -S nvidia nvidia-settings
 # VirtualBox: pacman -S virtualbox-guest-utils
 # XFCE: pacman -S lightdm lightdm-gtk-greeter network-manager-applet xfce4 xfce4-goodies
