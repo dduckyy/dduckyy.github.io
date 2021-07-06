@@ -20,6 +20,7 @@ pacman -S curl efibootmgr git grub noto-fonts noto-fonts-cjk noto-fonts-emoji no
 # Cinnamon: pacman -S blueberry cinnamon lightdm lightdm-gtk-greeter
 # GNOME: pacman -S celluloid evince file-roller gdm gedit gnome-control-center gnome-shell gnome-system-monitor gnome-terminal gnome-tweaksgthumb nautilus networkmanager networkmanager-openvpn pulseaudio
 # KDE: pacman -S ark dolphin gwenview konsole kate packagekit-qt5 plasma-meta pulseaudio-bluetooth
+# MATE: pacman -S blueman lightdm lightdm-gtk-greeter mate mate-extra network-manager-applet
 # Nvidia: pacman -S nvidia nvidia-settings
 # VirtualBox: pacman -S virtualbox-guest-utils
 # XFCE: pacman -S lightdm lightdm-gtk-greeter network-manager-applet xfce4 xfce4-goodies
